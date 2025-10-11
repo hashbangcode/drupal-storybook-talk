@@ -1,49 +1,15 @@
-# marp-talk-template
-A talk template that uses Marp CLI
+# Using Storybook To Preview Single Directory Components
 
-## Install
+A talk about using Storybook to preview single Directory Components.
 
-1 Clone the repo 
-```bash
-$ git clone git@github.com:pfwd/talk-template.git
-`````
+## Slides
 
-2 Install dependencies
+You can view the slides in a number of ways:
 
-```bash
-$ npm install
-```
-Update `src/slides.md` with content.  
-Add images to `src/assets/images/`.
+- HTML (download this repo open the file `dist/slides.html`)
+- [PDF](https://github.com/hashbangcode/drupal-storybook-talk/blob/main/dist/slides.pdf)
+- [PPTX](https://github.com/hashbangcode/drupal-storybook-talk/blob/main/dist/slides.pptx)
 
-## Build slide deck
+## Resources
 
-Use `npm run` to see all available commands.
-
-### Build HTML from slides
-
-```bash
-$ npm run build:html
-```
-
-### Watch HTML from slides
-
-```bash
-$ npm run watch:html
-```
-
-### Build PDF from slides
-
-```bash
-$ npm run build:pdf
-```
-
-### Build PPT from slides
-
-```bash
-$ npm run build:pp
-```
-
-## Thanks
-
-Many thanks to [Peter Fisher](https://twitter.com/pfwd) for the inital [Marp talk template](https://github.com/pfwd/talk-template).
+[Drupal 11: Using Storybook To Preview Single Directory Components](https://www.hashbangcode.com/article/drupal-11-using-storybook-preview-single-directory-components)
