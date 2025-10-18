@@ -12,4 +12,6 @@ You can view the slides in a number of ways:
 
 ## Resources
 
-[Drupal 11: Using Storybook To Preview Single Directory Components](https://www.hashbangcode.com/article/drupal-11-using-storybook-preview-single-directory-components)
+- [Storybook Drupal Example](https://github.com/hashbangcode/drupal-storybook)
+- [Drupal 11: Using Storybook To Preview Single Directory Components](https://www.hashbangcode.com/article/drupal-11-using-storybook-preview-single-directory-components)
+- [Drupal 11: Using SDC Component Library To Preview Single Directory Components](https://www.hashbangcode.com/article/drupal-11-using-sdc-component-library-preview-single-directory-components)
