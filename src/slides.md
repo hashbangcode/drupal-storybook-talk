@@ -3,18 +3,35 @@ theme: uncover
 paginate: true
 class:
   - lead
-  - invert
+
 size: 16:9
 style: |
-  .small-text {
-    font-size: 0.75rem;
-  }
   img[alt~="centre"] {
     display: block;
     margin: 0 auto;
-    max-width: 90%;
+    max-width: 70%;
   }
-footer: "Philip Norton [hashbangcode.com](https://www.hashbangcode.com) [@hashbangcode](https://twitter.com/hashbangcode) [@philipnorton42](https://twitter.com/philipnorton42)"
+  .small-text {
+    font-size: 0.75rem;
+  }
+  p {
+    text-align: left;
+  }
+  p.centre {
+    text-align: center;
+  }
+  .hidden-bullets li {
+    list-style-type: none
+  }
+  .left {
+    width: 50%;
+    float: left;
+  }
+  .right {
+    width: 50%;
+    float: right;
+  }
+footer: "Philip Norton [hashbangcode.com](https://www.hashbangcode.com) [fosstodon.org@hashbangcode](https://fosstodon.org/@hashbangcode) [fosstodon.org@philipnorton42](https://fosstodon.org/@philipnorton42)"
 marp: true
 
 ---
@@ -55,9 +72,7 @@ marp: true
 - There's also a Drupal and Storybook article on my site.
 -->
 
----
 
-# Using Storybook To Preview Single Directory Components
 
 ---
 <!-- _footer: '' -->
@@ -71,14 +86,16 @@ marp: true
 
 I've been looking at Storybook for a few years, but there's always been a disconnect between Storybook and Drupal. I could build the stories in Storybook, but I'd then have to rebuild them in Drupal.
 
+Here is an example of Storybook used by the JPL.
+
 -->
 ---
 
-# Why SDC?
+# Why Single Directory Components?
 
 - An important part of modern Drupal theme development.
 - Can be added to themes or modules.
-- Integrates with Drupal Canvas.
+- Integrates with **Drupal Canvas**.
 
 <!-- 
 
@@ -106,10 +123,22 @@ That changed with SDC and is facilitied by the Storybook module.
 A _very_ short introduction.
 
 ---
+<!-- _footer: '' -->
+## SDC
+
+![centre](../src/assets/images/edinburgh_university.png)
+
+---
+<!-- _footer: '' -->
+## SDC
+
+![centre](../src/assets/images/edinburgh_university_blocks.png)
+
+---
 
 ## SDC
 
-- They exist in a single directory (hence the name)
+- They exist in a single directory (hence the name).
 
 ```
 example_component/
@@ -150,14 +179,14 @@ slots:
 props:
   type: object
   properties:
-    extra_classes:
+    title:
       type: ['string', 'null']
       title: Extra classes
       examples:
         - extrawide, dark
 ```
 
-- `{{ extra_classes }}` can now be used in the template.
+- `{{ title }}` can now be used in the template.
 
 ---
 
@@ -167,18 +196,18 @@ props:
 
 ```yml
 slots:
-  title:
-    title: "Title"
+  body:
+    title: "Body copy."
 ```
 
-- `{{ title }}` is now available in the template.
+- `{{ body }}` is now available in the template.
 
 ---
 
 ## SDC - Props vs Slots
 
-- `props` - Properties that the component has. Classes, menu depth, display options, etc.
-- `slots` - Objects that the component can render. Title, body copy, images etc.
+- `props` - Properties or simple elements that the component has. Title, classes, menu depth, display options, etc.
+- `slots` - Objects or more complex elements that the component can render. Body copy, images etc.
 
 ---
 <!-- _footer: '' -->
@@ -218,13 +247,12 @@ Twig template:
 
 ## SDC - Other files
 
-- Any *.css or *.js files will be automatically inclued as attachments.
+- Any `*.css` or `*.js` files will be automatically inclued as attachments.
 
 - Template and CSS can reference files inside the SDC.
 
-```
-add some examples of images being referenced from SDC
-```
+
+[[[ add some examples of images being referenced from SDC ]]] 
 
 ---
 
@@ -232,7 +260,18 @@ add some examples of images being referenced from SDC
 
 - With the SDC created we can now add it to our Drupal template templates.
 
-- For exmaple rendering an Author content type.
+```html
+{{ include('my_theme:example_component', {
+  title: label,
+  body: content.body,
+}) }}
+```
+
+---
+
+## SDC - Usage
+
+- An example of rendering an Author content type.
 
 ```html
 {{ include('my_theme:author', {
@@ -307,39 +346,74 @@ drush role:perm:add anonymous 'render storybook stories'
 
 ## Storybook Module - Stories
 
-- Use include for simple components that only have properties.
+- Use `include` for simple components.
+
+<div class="left">
+<p class="small-text">example_component.twig</p>
+
+```twig
+<div>
+  <h2>{{ title }}</h2>
+</div>
+```
+
+</div>
+
+<div class="right">
+<p class="small-text">example_component.stories.twig</p>
 
 ```twig
   {% story default with {
     name: '1. Default',
     args: {
-      extra_classes: 'grid'
+      title: 'The Title'
     }
   } %}
   {{ include('my_theme:example_component', {  
-    extra_classes
+    title
   }) }}
 ```
+</div>
 
 ---
-
+<!-- _footer: '' -->
 ## Storybook Module - Stories
 
-- Use embed with more complex components that have slots.
+- Use `embed` with more complex components that have slots.
+
+<div class="left">
+<p class="small-text">example_component.twig</p>
 
 ```twig
+<div>
+{% block body %}
+  {{ body }}
+{% endblock %}
+</div>
+```
+
+</div>
+
+<div class="right">
+<p class="small-text">example_component.stories.twig</p>
+
+```twig
+---
   {% story default with {
     name: '1. Default',
     args: {
-      title: 'The title'
+      body: '<p>Some body copy.</p>'
     }
   } %}
   {% embed 'my_theme:example_component' %}
-    {% block avatar %}
-      {{ title|raw }}
+    {% block body %}
+      {{ body|raw }}
     {% endblock %}
   {% endembed %}
+---
 ```
+
+</div>
 
 --- 
 
@@ -363,7 +437,7 @@ drush storybook:generate-all-stories
 <!-- _footer: '' -->
 ## Drupal Setup - CORS Prevention
 
-- Add the following rules to the `development.services.yml` file.
+- Add these rules to `development.services.yml` file.
 
 ```yml
 parameters:
@@ -409,7 +483,8 @@ drush state:set disable_rendered_output_cache_bins 1
 
 ## Storybook - Install
 
-- Install Storybook in a separate directory, away from your Drupal root.
+- Install Storybook in a separate directory, away from your Drupal root. 
+- Eg. .
 
 ```
 npm init -y
@@ -485,7 +560,7 @@ web_extra_daemons:
 
 ## Running Storybook - DDEV
 
-- To stop DDEV complaining you might also want to add `--no-open` flag the relevant line in the package.json file to prevent the browser opening.
+- To stop DDEV complaining you may want to add <br> `--no-open` flag the relevant line in the `package.json` file to prevent the browser opening.
 
 ```
   "scripts": {
@@ -545,8 +620,14 @@ location ^~ /storybook-static {
 - If you only see a blank screen, check Drupal logs.
 - Be aware that Drupal will wrap some things with extra elements. That might throw off your positioning and margins.
 - Setup a styleguide storybook.
+
+---
+
+# Tips
+
 - Understand props and slots.
 - Don't abstract too much with SDC.
+- Don't try to cover too much with SDC.
 
 ---
 
@@ -556,7 +637,17 @@ location ^~ /storybook-static {
 
 - [SDC - Component library](https://www.drupal.org/project/sdc_component_library)
 
-[ADD SCREENSHOT OF SDC COMPONENT LIBRARY MODUE N USE HERE]
+[[[ADD SCREENSHOT OF SDC COMPONENT LIBRARY MODUE N USE HERE]]]
+
+
+---
+
+# Alternatives
+
+- [Single Directory Components Styleguide](https://www.drupal.org/project/sdc_styleguide)
+
+
+[[[ADD SCREENSHOT OF SDC COMPONENT STYLEGUIDE MODUE N USE HERE]]]
 
 ---
 
