@@ -12,7 +12,7 @@ style: |
     max-width: 70%;
   }
   .small-text {
-    font-size: 0.75rem;
+    font-size: 0.5rem;
   }
   p {
     text-align: left;
