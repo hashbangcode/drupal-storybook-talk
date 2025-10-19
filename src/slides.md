@@ -348,6 +348,7 @@ drush role:perm:add anonymous 'render storybook stories'
 
 - Use `include` for simple components.
 
+<div>
 <div class="left">
 <p class="small-text">example_component.twig</p>
 
@@ -374,6 +375,7 @@ drush role:perm:add anonymous 'render storybook stories'
   }) }}
 ```
 </div>
+</div>
 
 ---
 <!-- _footer: '' -->
@@ -381,6 +383,7 @@ drush role:perm:add anonymous 'render storybook stories'
 
 - Use `embed` with more complex components that have slots.
 
+<div>
 <div class="left">
 <p class="small-text">example_component.twig</p>
 
@@ -413,6 +416,7 @@ drush role:perm:add anonymous 'render storybook stories'
 ---
 ```
 
+</div>
 </div>
 
 --- 
