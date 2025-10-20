@@ -9,7 +9,7 @@ style: |
   img[alt~="centre"] {
     display: block;
     margin: 0 auto;
-    max-width: 70%;
+    max-width: 80%;
   }
   .small-text {
     font-size: 0.5rem;
@@ -169,6 +169,11 @@ slots:
   # ...
 ```
 
+<!--
+
+Note that when you create a component in a module this file is heavily validated. In the theme, you can 'get away' with a bit more.
+
+-->
 ---
 <!-- _footer: '' -->
 ## SDC - *.component.yml
@@ -248,12 +253,14 @@ Twig template:
 ## SDC - Other files
 
 - Any `*.css` or `*.js` files will be automatically inclued as attachments.
-
 - Template and CSS can reference files inside the SDC.
 
-
-[[[ add some examples of images being referenced from SDC ]]] 
-
+```twig
+<img src="/{{ componentMetadata.path }}/assets/image.png">
+```
+<!--
+The componentMetadata object contains some information about the component.
+-->
 ---
 
 ## SDC - Usage
@@ -320,7 +327,7 @@ drush role:perm:add anonymous 'render storybook stories'
 ## Storybook Module - Stories
 
 ```twig
-{% stories componentName with { title: 'Components/ComponentName' } %}
+{% stories exampleComponent with { title: 'Components/Example Component' } %}
 
   {% story default with {
     name: '1. Default',
@@ -328,7 +335,7 @@ drush role:perm:add anonymous 'render storybook stories'
       some_property: 'A value'
     }
   } %}
-  {% embed 'my_theme:componentName' %}
+  {% embed 'my_theme:example_component' %}
   {% endembed %}
 
   {% endstory %}
@@ -340,7 +347,21 @@ drush role:perm:add anonymous 'render storybook stories'
 
 ## Storybook Module - Stories
 
-- [[ look at how stories are translated into Storybook previews ]]
+```
+{% stories exampleComponent with { title: 'Components/Example Component' } %}
+```
+
+![centre](../src/assets/images/storybook_path.png)
+
+---
+
+## Storybook Module - Stories
+
+```
+{% stories exampleComponent with { title: 'Components/Examples/Example Component' } %}
+```
+
+![centre](../src/assets/images/storybook_path_deeper.png)
 
 ---
 
@@ -419,6 +440,33 @@ drush role:perm:add anonymous 'render storybook stories'
 </div>
 </div>
 
+---
+<!-- _footer: '' -->
+## Storybook Module - Stories
+
+- You can add multiple stories for your component.
+ 
+```twig
+  {% story wrapped with {
+    name: '2. Wrapped',
+    args: {
+      example_property: 'Example property',
+      example_slot: '<p>Example slot with lots of content.</p>',
+    }
+  } %}
+    <div style="border:1px solid red; width: 100px;">
+    {% embed 'my_theme:example_component' %}
+      {% block example_slot %}
+        {{ example_slot|raw }}
+      {% endblock %}
+    {% endembed %}
+    </div>
+  {% endstory %}
+```
+<!--
+This show a second story where the element in question is wrapped in a restrictive red box.
+You can add stories to show different content for your component, but also think about the surrounding elements on the page. Adding in some example markup to show the component in situ can be really useful.
+-->
 --- 
 
 ## Storybook Module - Stories
@@ -455,7 +503,10 @@ parameters:
     maxAge: false
     supportsCredentials: true
 ```
-
+<!--
+CORS = Cross-Origin Resource Sharing 
+Prevents websites from
+-->
 ---
 
 ## Drupal Setup - CORS Prevention
@@ -465,19 +516,28 @@ parameters:
 ```php
 $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
 ```
+
+- Don't put these rules on your production instance!
+
+---
+<!-- _footer: '' -->
+## Drupal Setup - Twig Debug
+
+- Turn on the theme development settings.
+
+![centre](../src/assets/images/twig_dev_mode.png)
+
 ---
 
 ## Drupal Setup - Twig Debug
 
-Turn on the theme development settings.
+Turn on the theme development settings (via Drush).
 
 ```yml
 drush state:set twig_debug 1
 drush state:set twig_cache_disable 1
 drush state:set disable_rendered_output_cache_bins 1
 ```
-
-[[[[ Insert a picutre of the twig debug page here ]]]]
 
 ---
 
@@ -602,6 +662,14 @@ location ^~ /storybook-static {
 ```
 
 ---
+<!-- _footer: '' -->
+## Storybook - SDC
+
+- The whole mid section here is an iframe that points to Drupal.
+
+![centre](../src/assets/images/storybook_iframe.png)
+
+---
 
 # Workflow
 
@@ -622,13 +690,15 @@ location ^~ /storybook-static {
 
 - Look for CORS errors.
 - If you only see a blank screen, check Drupal logs.
-- Be aware that Drupal will wrap some things with extra elements. That might throw off your positioning and margins.
-- Setup a styleguide storybook.
+- Storybook loves to cache the sidebar.
+- Storybook has lots of plugins, check a few of them out.
 
 ---
 
 # Tips
 
+- Be aware that Drupal will wrap some things with extra elements. That might throw off your positioning and margins.
+- Setup a styleguide storybook.
 - Understand props and slots.
 - Don't abstract too much with SDC.
 - Don't try to cover too much with SDC.
@@ -638,20 +708,23 @@ location ^~ /storybook-static {
 # Alternatives
 
 ---
-
+<!-- _footer: '' -->
 - [SDC - Component library](https://www.drupal.org/project/sdc_component_library)
 
-[[[ADD SCREENSHOT OF SDC COMPONENT LIBRARY MODUE N USE HERE]]]
+![centre](../src/assets/images/drupal_sdc_preview_created.png)
 
+<!--
+A good alternative if you don't want to muck about with storybook.
+Plus, comes with an accessibility scanner.
+-->
 
 ---
-
+<!-- _footer: '' -->
 # Alternatives
 
 - [Single Directory Components Styleguide](https://www.drupal.org/project/sdc_styleguide)
 
-
-[[[ADD SCREENSHOT OF SDC COMPONENT STYLEGUIDE MODUE N USE HERE]]]
+![centre](../src/assets/images/sdc_styleguide.png)
 
 ---
 
@@ -661,7 +734,6 @@ location ^~ /storybook-static {
 - [Storybook Module](https://www.drupal.org/project/storybook)
 - [Drupal Documentation on SDC](https://www.drupal.org/docs/develop/theming-drupal/using-single-directory-components)
 - [Drupal 11: Using Storybook To Preview Single Directory Components](https://www.hashbangcode.com/article/drupal-11-using-storybook-preview-single-directory-components)
-
 
 ---
 
