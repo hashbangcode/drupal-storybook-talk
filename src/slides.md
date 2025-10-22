@@ -184,14 +184,14 @@ Note that when you create a component in a module this file is heavily validated
 props:
   type: object
   properties:
-    title:
+    extra_classes:
       type: ['string', 'null']
       title: Extra classes
       examples:
         - extrawide, dark
 ```
 
-- `{{ title }}` can now be used in the template.
+- `{{ extra_classes }}` can now be used in the template.
 
 ---
 
@@ -224,14 +224,15 @@ Slot in a *.component.yml file:
 
 ```yml
 slots:
-  title:
-    title: "Title"
+  body:
+    title: Body copy
+    description: The HTML body copy of the element.
 ```
 
 Twig template:
 
 ```html
-{{ title }}
+{{ body }}
 ```
 
 ---
@@ -241,8 +242,8 @@ Twig template:
 - You should probably add `slots` using the `block` Twig tag.
 
 ```twig
-{% block title %}
-  {{ title }}
+{% block body %}
+  {{ body }}
 {% endblock %}
 ```
 
@@ -253,23 +254,36 @@ Twig template:
 ## SDC - Other files
 
 - Any `*.css` or `*.js` files will be automatically inclued as attachments.
+- The libraries attached to the theme will also be included when the SDC is rendered in Storybook.
+
+---
+
+## SDC - Other files
+
 - Template and CSS can reference files inside the SDC.
 
+CSS:
+```css
+background-image: url('./assets/background.png');
+```
+
+Image:
 ```twig
 <img src="/{{ componentMetadata.path }}/assets/image.png">
 ```
 <!--
 The componentMetadata object contains some information about the component.
+In this case we are using the .path property that contains the current path of the SDC.
 -->
 ---
 
 ## SDC - Usage
 
-- With the SDC created we can now add it to our Drupal template templates.
+- With the SDC created we can now add it to our Drupal template.
 
-```html
+```twig
 {{ include('my_theme:example_component', {
-  title: label,
+  extra_classes: 'some-class',
   body: content.body,
 }) }}
 ```
@@ -280,10 +294,10 @@ The componentMetadata object contains some information about the component.
 
 - An example of rendering an Author content type.
 
-```html
+```twig
 {{ include('my_theme:author', {
   author_url: url,
-  name: label,
+  name: label, 
   bio: content.field_author_short_bio,
   avatar: content.field_author_avatar
 }) }}
@@ -329,12 +343,15 @@ drush role:perm:add anonymous 'render storybook stories'
 ```twig
 {% stories exampleComponent with { title: 'Components/Example Component' } %}
 
+  {# Define story name and args: #}
   {% story default with {
     name: '1. Default',
     args: {
       some_property: 'A value'
     }
   } %}
+
+  {# Embed component: #}
   {% embed 'my_theme:example_component' %}
   {% endembed %}
 
@@ -347,7 +364,7 @@ drush role:perm:add anonymous 'render storybook stories'
 
 ## Storybook Module - Stories
 
-```
+```twig
 {% stories exampleComponent with { title: 'Components/Example Component' } %}
 ```
 
@@ -357,11 +374,29 @@ drush role:perm:add anonymous 'render storybook stories'
 
 ## Storybook Module - Stories
 
-```
+```twig
 {% stories exampleComponent with { title: 'Components/Examples/Example Component' } %}
 ```
 
 ![centre](../src/assets/images/storybook_path_deeper.png)
+
+---
+<!-- _footer: '' -->
+## Storybook Module - Stories
+
+- Any args passed to the story are editable properties.
+
+```twig
+  {% story default with {
+    name: '1. Default',
+    args: {
+      example_property: 'Example property',
+      example_slot: 'Example slot',
+    }
+  } %}
+```
+
+![centre](../src/assets/images/storybook_args.png)
 
 ---
 
@@ -397,6 +432,9 @@ drush role:perm:add anonymous 'render storybook stories'
 ```
 </div>
 </div>
+<!-- 
+Here, the title prop is being injected into the template.
+-->
 
 ---
 <!-- _footer: '' -->
@@ -415,7 +453,9 @@ drush role:perm:add anonymous 'render storybook stories'
 {% endblock %}
 </div>
 ```
-
+<!-- 
+Note that in this case any `props` we have defined will be passed to the template automatically.
+-->
 </div>
 
 <div class="right">
@@ -547,10 +587,10 @@ drush state:set disable_rendered_output_cache_bins 1
 
 ## Storybook - Install
 
-- Install Storybook in a separate directory, away from your Drupal root. 
-- Eg. .
+- Install Storybook in a separate directory, away from your Drupal root.
 
 ```
+mkdir tests && cd tests
 npm init -y
 npx storybook init --type server
 ```
@@ -644,6 +684,7 @@ npm run build-storybook
 ```
 
 - The static site can be deployed and served as a site.
+- This means that you can demo SDCs to clients before they are written into Drupal tempalte.
 
 ---
 
@@ -699,7 +740,7 @@ location ^~ /storybook-static {
 
 - Be aware that Drupal will wrap some things with extra elements. That might throw off your positioning and margins.
 - Setup a styleguide storybook.
-- Understand props and slots.
+- Understand `props` and `slots`.
 - Don't abstract too much with SDC.
 - Don't try to cover too much with SDC.
 
@@ -708,6 +749,8 @@ location ^~ /storybook-static {
 # Alternatives
 
 ---
+# Alternatives
+
 <!-- _footer: '' -->
 - [SDC - Component library](https://www.drupal.org/project/sdc_component_library)
 
