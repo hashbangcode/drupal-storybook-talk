@@ -215,6 +215,19 @@ slots:
 - `slots` - Objects or more complex elements that the component can render. Body copy, images etc.
 
 ---
+
+## SDC - *.component.yml
+
+- Use `libraryOverrides` to inject Drupal libraries into your SDC.
+
+```yml
+libraryOverrides:
+  dependencies:
+    - core/drupal
+    - core/once
+```
+
+---
 <!-- _footer: '' -->
 ## SDC - *.twig
 
@@ -521,6 +534,12 @@ drush storybook:generate-all-stories
 
 ---
 
+## Storybook Module - Stories
+
+- Don't commit the `*.stories.json` files, they are created for the current site.
+
+---
+
 # Drupal Setup
 
 - Some settings are needed to allow Storybook to connect to Drupal.
@@ -688,17 +707,36 @@ npm run build-storybook
 
 ---
 
-## Hosting Storybook
+## Building Storybook - Hosting
 
 - Use the following nginx configuration.
 
-```php
+```nginx
 location ^~ /storybook-static {
   add_header "Access-Control-Allow-Origin" *;
   add_header "Access-Control-Allow-Methods" "GET, POST, OPTIONS";
   disable_symlinks off;
   alias /your/project/directory/tests/storybook-static;
   index index.html;
+}
+```
+---
+
+## Buidling Storybook - Hosting
+
+- Extra configuration is needed for external files.
+
+```nginx
+location @rewrite {
+    rewrite ^ /index.php;
+}
+
+location ~* \.(js|css|woff|woff2|ttf)$ {
+    add_header Access-Control-Allow-Origin '*';
+    add_header X-Content-Type-Options nosniff;
+    try_files $uri @rewrite;
+    expires -1;
+    log_not_found off;
 }
 ```
 
@@ -734,6 +772,10 @@ location ^~ /storybook-static {
 - Storybook loves to cache the sidebar.
 - Storybook has lots of plugins, check a few of them out.
 
+<!-- 
+CORS errors will likey be your biggest headache.
+Make notes as you solve them as you can use these notes on other projects.
+-->
 ---
 
 # Tips
@@ -769,6 +811,20 @@ Plus, comes with an accessibility scanner.
 
 ![centre](../src/assets/images/sdc_styleguide.png)
 
+<!--
+A bit unstable in places.
+-->
+---
+
+# Alternatives
+
+- [Storybook SDC Addon](storybook.js.org/addons/storybook-addon-sdc)
+- Plugin for Storybook that allows you to build SDCs as native Storybook stories.
+<!--
+
+Whilst theoretically possible, no SDC is an island.
+
+-->
 ---
 
 # Resources
