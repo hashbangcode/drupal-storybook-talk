@@ -11,6 +11,9 @@ style: |
     margin: 0 auto;
     max-width: 80%;
   }
+  .smaller-text {
+    font-size: 0.75rem;
+  }
   .small-text {
     font-size: 0.5rem;
   }
@@ -53,7 +56,7 @@ marp: true
 <!--
 - Doing Drupal for about 15 years.
 - Programming in general for about 20 now.
-- That is a picture of a Lily58 mechanical keyboard.
+- This is a picture of a Lily58 mechanical keyboard.
 -->
 
 ---
@@ -75,10 +78,12 @@ marp: true
 
 
 ---
-<!-- _footer: '' -->
 # What Is Storybook?
 
 - Storybook is a frontend tool for creating UI components.
+- Mature product with a plugin system.
+
+---
 
 ![centre](../src/assets/images/storybook_jpl.png)
 
@@ -91,7 +96,7 @@ Here is an example of Storybook used by the JPL.
 -->
 ---
 
-# Why Single Directory Components?
+# Why Talk About Single Directory Components?
 
 - An important part of modern Drupal theme development.
 - Can be added to themes or modules.
@@ -121,6 +126,10 @@ That changed with SDC and is facilitied by the Storybook module.
 ## Single Directory Components (SDC)
 
 A _very_ short introduction.
+
+<!--
+From this point on SDC will be Single Directory Components.
+-->
 
 ---
 <!-- _footer: '' -->
@@ -345,8 +354,8 @@ drush role:perm:add anonymous 'render storybook stories'
 
 ## Storybook Module - Stories
 
-- For each component you want to test you need a `*.stories.twig` file.
-- This contains a number of examples of the SDC in use.
+- You need a `*.stories.twig` file for every component you want to preview.
+- This file contains a number of examples of the SDC in use.
 - Add additional markup or other components to the story.
 
 ---
@@ -499,6 +508,8 @@ Note that in this case any `props` we have defined will be passed to the templat
 
 - You can add multiple stories for your component.
  
+ <div class="smaller-text">
+
 ```twig
   {% story wrapped with {
     name: '2. Wrapped',
@@ -516,8 +527,10 @@ Note that in this case any `props` we have defined will be passed to the templat
     </div>
   {% endstory %}
 ```
+</div>
+
 <!--
-This show a second story where the element in question is wrapped in a restrictive red box.
+This shows a second story where the element in question is wrapped in a restrictive red box.
 You can add stories to show different content for your component, but also think about the surrounding elements on the page. Adding in some example markup to show the component in situ can be really useful.
 -->
 --- 
@@ -564,7 +577,8 @@ parameters:
 ```
 <!--
 CORS = Cross-Origin Resource Sharing 
-Prevents websites from
+Prevents websites from serving content to sites that they haven't previouly agreed to.
+This creates a problem when we do want to share content.
 -->
 ---
 
@@ -662,10 +676,10 @@ npm run storybook
 - This will open a browser window with the address http://localhost:6006.
 
 ---
-
+<!-- _footer: '' -->
 ## Running Storybook - DDEV
 
-- If you are using DDEV then can run Storybook from inside the web container, with some config.
+- If you are using DDEV then you can run Storybook from inside the web container, with some config.
 
 ```yml
 web_extra_exposed_ports:
@@ -678,12 +692,14 @@ web_extra_daemons:
     command: "tail -F package.json > /dev/null"
     directory: /var/www/html/tests
 ```
-
+<!--
+Add this to your .ddev/config.yml file and restart ddev.
+-->
 --- 
 
 ## Running Storybook - DDEV
 
-- To stop DDEV complaining you may want to add <br> `--no-open` flag the relevant line in the `package.json` file to prevent the browser opening.
+- To stop DDEV complaining you may want to add <br> `--no-open` flag to the relevant line in the `package.json` file to prevent the browser opening.
 
 ```
   "scripts": {
@@ -703,7 +719,7 @@ npm run build-storybook
 ```
 
 - The static site can be deployed and served as a site.
-- This means that you can demo SDCs to clients before they are written into Drupal tempalte.
+- This means that you can demo SDCs to clients before they are written into Drupal template.
 
 ---
 
