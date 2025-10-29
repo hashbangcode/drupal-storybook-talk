@@ -593,14 +593,6 @@ $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml'
 - Don't put these rules on your production instance!
 
 ---
-<!-- _footer: '' -->
-## Drupal Setup - Twig Debug
-
-- Turn on the theme development settings.
-
-![centre](../src/assets/images/twig_dev_mode.png)
-
----
 
 ## Drupal Setup - Twig Debug
 
@@ -611,6 +603,13 @@ drush state:set twig_debug 1
 drush state:set twig_cache_disable 1
 drush state:set disable_rendered_output_cache_bins 1
 ```
+
+---
+
+<!-- _footer: '' -->
+## Drupal Setup - Twig Debug
+
+![centre](../src/assets/images/twig_dev_mode.png)
 
 ---
 
