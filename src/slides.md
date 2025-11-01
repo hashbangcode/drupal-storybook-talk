@@ -54,8 +54,8 @@ marp: true
 ![bg h:50% right:40%](../src/assets/images/lily58.png)
 
 <!--
-- Doing Drupal for about 15 years.
-- Programming in general for about 20 now.
+- Doing Drupal for 15 years.
+- Programming in general for 20.
 - This is a picture of a Lily58 mechanical keyboard.
 -->
 
@@ -91,6 +91,8 @@ marp: true
 
 I've been looking at Storybook for a few years, but there's always been a disconnect between Storybook and Drupal. I could build the stories in Storybook, but I'd then have to rebuild them in Drupal.
 
+That changed with SDC and is facilitied by the Storybook module.
+
 Here is an example of Storybook used by the JPL.
 
 -->
@@ -114,12 +116,6 @@ Now is a good time to get into SDC.
 - Introduction To **Single Directory Components**
 - Installing the **Storybook Module**
 - Installing and running **Storybook**
-
-<!--
-
-That changed with SDC and is facilitied by the Storybook module.
-
--->
 
 ---
 
@@ -147,7 +143,7 @@ From this point on SDC will be Single Directory Components.
 
 ## SDC
 
-- They exist in a single directory (hence the name).
+- They exist in a single directory<br>(hence the name).
 
 ```
 example_component/
@@ -206,7 +202,8 @@ props:
 
 ## SDC - *.component.yml
 
-- `slots` are much simpler to define.
+- `slots` are for printing content and othe SDCs.
+- They are much simpler to define.
 
 ```yml
 slots:
@@ -221,7 +218,7 @@ slots:
 ## SDC - Props vs Slots
 
 - `props` - Properties or simple elements that the component has. Title, classes, menu depth, display options, etc.
-- `slots` - Objects or more complex elements that the component can render. Body copy, images etc.
+- `slots` - Objects or more complex elements that the component can render. Body copy, images, nested SDCs etc.
 
 ---
 
@@ -242,7 +239,7 @@ libraryOverrides:
 
 - A normal twig template that renders the defined structure of the component.
 
-Slot in a *.component.yml file:
+- Example `slot` in a `*.component.yml` file:
 
 ```yml
 slots:
@@ -269,7 +266,8 @@ Twig template:
 {% endblock %}
 ```
 
-- This allows you to override the value in Storybook without having to add `|raw` to your Twig template.
+- This allows you to override the value easily.
+- You can inject the value in Storybook without having to add `|raw` to your Twig template.
 
 ---
 
@@ -314,7 +312,7 @@ In this case we are using the .path property that contains the current path of t
 
 ## SDC - Usage
 
-- An example of rendering an Author content type.
+- An example of rendering an Author content type via an SDC.
 
 ```twig
 {{ include('my_theme:author', {
@@ -356,7 +354,7 @@ drush role:perm:add anonymous 'render storybook stories'
 
 - You need a `*.stories.twig` file for every component you want to preview.
 - This file contains a number of examples of the SDC in use.
-- Add additional markup or other components to the story.
+- You can also add additional markup or other components to the story.
 
 ---
 <!-- _footer: '' -->
@@ -419,12 +417,16 @@ drush role:perm:add anonymous 'render storybook stories'
 ```
 
 ![centre](../src/assets/images/storybook_args.png)
+<!-- 
 
+The data types of the args are pulled from the *.component.yml file.
+
+-->
 ---
 
 ## Storybook Module - Stories
 
-- Use `include` for simple components.
+- Use `include` for simple components with only `props`.
 
 <div>
 <div class="left">
@@ -462,7 +464,7 @@ Here, the title prop is being injected into the template.
 <!-- _footer: '' -->
 ## Storybook Module - Stories
 
-- Use `embed` with more complex components that have slots.
+- Use `embed` with more complex components that have `slots`.
 
 <div>
 <div class="left">
@@ -535,21 +537,49 @@ You can add stories to show different content for your component, but also think
 -->
 --- 
 
-## Storybook Module - Stories
+## Storybook Module - Drush
 
 - Storybook doesn't understand `*.stories.twig` files.
 - They need converting into `*.stories.json`.
 - This Storybook module comes with a couple of Drush commands to do this.
- 
+
+---
+
+## Storybook Module - Drush
+
+- Convert all stories in your site.
+
 ```
 drush storybook:generate-all-stories
+```
+
+- This command will only generate the file if nothing has changed.
+
+---
+
+## Storybook Module - Drush
+
+- Watch for changes in your stories and re-generate the files.
+
+```
+watch --color drush storybook:generate-all-stories
+```
+
+---
+
+## Storybook Module - Drush
+
+- Convert a single story.
+
+```
+drush storybook:generate-stories themes/custom/my_theme/components/author/example_component.stories.twig
 ```
 
 ---
 
 ## Storybook Module - Stories
 
-- Don't commit the `*.stories.json` files, they are created for the current site.
+- Don't commit the `*.stories.json` files, they are created for the current site and will contain URLs for that site.
 
 ---
 
@@ -632,7 +662,7 @@ npx storybook init --type server
 
 ## Storybook - Install
 
-- This will give you a directory containing.
+- This will give you a directory containing the following.
 
 ```
 .storybook
@@ -718,7 +748,17 @@ npm run build-storybook
 ```
 
 - The static site can be deployed and served as a site.
-- This means that you can demo SDCs to clients before they are written into Drupal template.
+- This means that you can host Storybook and demo your SDCs to clients before they are written into Drupal template.
+
+---
+
+<!-- _footer: '' -->
+## Storybook - SDC
+
+- Storybook works by showing off your SDCs as they exist in your site.
+- The whole mid section here is an iframe that points to Drupal.
+
+![centre](../src/assets/images/storybook_iframe.png)
 
 ---
 
@@ -736,10 +776,11 @@ location ^~ /storybook-static {
 }
 ```
 ---
+<!-- _footer: "" -->
 
 ## Buidling Storybook - Hosting
 
-- Extra configuration is needed for external files.
+- Extra configuration is needed for external files in your Drupal site.
 
 ```nginx
 location @rewrite {
@@ -756,23 +797,16 @@ location ~* \.(js|css|woff|woff2|ttf)$ {
 ```
 
 ---
-<!-- _footer: '' -->
-## Storybook - SDC
-
-- The whole mid section here is an iframe that points to Drupal.
-
-![centre](../src/assets/images/storybook_iframe.png)
-
----
 
 # Workflow
 
 - A workflow for building a component.
 
-  - Create story for component
-  - Build (or run) storybook
-  - Preview story
-  - Once the SDC is complete, add it to your template.
+  - Start building your SDC
+  * Create a story for the component
+  * Build (or run) Storybook
+  * Develop the story inside Storybook 
+  * Once the SDC is complete, add it to your Drupal template.
 
 ---
 
@@ -783,9 +817,10 @@ location ~* \.(js|css|woff|woff2|ttf)$ {
 # Tips
 
 - Look for CORS errors.
-- If you only see a blank screen, check Drupal logs.
-- Storybook loves to cache the sidebar.
-- Storybook has lots of plugins, check a few of them out.
+* If you only see a blank screen, check Drupal logs.
+* Don't commit your `*.stories.json` files, build them on deploy.
+* Storybook loves to cache the sidebar.
+* Storybook has lots of plugins, check a few of them out.
 
 <!-- 
 CORS errors will likey be your biggest headache.
@@ -796,10 +831,10 @@ Make notes as you solve them as you can use these notes on other projects.
 # Tips
 
 - Be aware that Drupal will wrap some things with extra elements. That might throw off your positioning and margins.
-- Setup a styleguide storybook.
-- Understand `props` and `slots`.
-- Don't abstract too much with SDC.
-- Don't try to cover too much with SDC.
+* Understand `props` and `slots`.
+* Setup a styleguide storybook.
+* Don't abstract too much with SDC.
+* Don't try to cover too much with SDC.
 
 ---
 
@@ -837,7 +872,9 @@ A bit unstable in places.
 - Plugin for Storybook that allows you to build SDCs as native Storybook stories.
 <!--
 
-Whilst theoretically possible, no SDC is an island.
+This seems a bit backwards to me.
+
+Whilst theoretically possible, no SDC is an island. You will find that Drupal has injected some markup or styles into your theme.
 
 -->
 ---
