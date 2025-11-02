@@ -816,7 +816,7 @@ location ~* \.(js|css|woff|woff2|ttf)$ {
 
 # Tips
 
-- Look for CORS errors.
+* Look for CORS errors.
 * If you only see a blank screen, check Drupal logs.
 * Don't commit your `*.stories.json` files, build them on deploy.
 * Storybook loves to cache the sidebar.
@@ -830,7 +830,7 @@ Make notes as you solve them as you can use these notes on other projects.
 
 # Tips
 
-- Be aware that Drupal will wrap some things with extra elements. That might throw off your positioning and margins.
+* Be aware that Drupal will wrap some things with extra elements. That might throw off your positioning and margins.
 * Understand `props` and `slots`.
 * Setup a styleguide storybook.
 * Don't abstract too much with SDC.

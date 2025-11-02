@@ -12,6 +12,9 @@ You can view the slides in a number of ways:
 
 ## Resources
 
+- [Storybook](https://storybook.js.org/)
+- [Drupal Storybook Module](https://www.drupal.org/project/storybook)
+- [Drupal Documentation: Using Single-Directory Components](https://www.drupal.org/docs/develop/theming-drupal/using-single-directory-components)
 - [Storybook Drupal Example](https://github.com/hashbangcode/drupal-storybook)
 - [Drupal 11: Using Storybook To Preview Single Directory Components](https://www.hashbangcode.com/article/drupal-11-using-storybook-preview-single-directory-components)
 - [Drupal 11: Using SDC Component Library To Preview Single Directory Components](https://www.hashbangcode.com/article/drupal-11-using-sdc-component-library-preview-single-directory-components)
