@@ -778,7 +778,7 @@ location ^~ /storybook-static {
 ---
 <!-- _footer: "" -->
 
-## Buidling Storybook - Hosting
+## Building Storybook - Hosting
 
 - Extra configuration is needed for external files in your Drupal site.
 
