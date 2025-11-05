@@ -367,7 +367,8 @@ drush role:perm:add anonymous 'render storybook stories'
   {% story default with {
     name: '1. Default',
     args: {
-      some_property: 'A value'
+      example_property: 'Example property',
+      example_slot: 'Example slot',
     }
   } %}
 
@@ -486,7 +487,6 @@ Note that in this case any `props` we have defined will be passed to the templat
 <p class="small-text">example_component.stories.twig</p>
 
 ```twig
----
   {% story default with {
     name: '1. Default',
     args: {
@@ -498,7 +498,6 @@ Note that in this case any `props` we have defined will be passed to the templat
       {{ body|raw }}
     {% endblock %}
   {% endembed %}
----
 ```
 
 </div>
@@ -520,7 +519,7 @@ Note that in this case any `props` we have defined will be passed to the templat
       example_slot: '<p>Example slot with lots of content.</p>',
     }
   } %}
-    <div style="border:1px solid red; width: 100px;">
+    <div style="border:1px solid red; width: 365px; height: 500px;">
     {% embed 'my_theme:example_component' %}
       {% block example_slot %}
         {{ example_slot|raw }}
@@ -752,16 +751,6 @@ npm run build-storybook
 
 ---
 
-<!-- _footer: '' -->
-## Storybook - SDC
-
-- Storybook works by showing off your SDCs as they exist in your site.
-- The whole mid section here is an iframe that points to Drupal.
-
-![centre](../src/assets/images/storybook_iframe.png)
-
----
-
 ## Building Storybook - Hosting
 
 - Use the following nginx configuration.
@@ -796,6 +785,17 @@ location ~* \.(js|css|woff|woff2|ttf)$ {
 }
 ```
 
+
+---
+
+<!-- _footer: '' -->
+## Storybook - SDC
+
+- Storybook works by showing off your SDCs as they exist in your site.
+- The whole mid section here is an iframe that points to Drupal.
+
+![centre](../src/assets/images/storybook_iframe.png)
+
 ---
 
 # Workflow
@@ -805,7 +805,7 @@ location ~* \.(js|css|woff|woff2|ttf)$ {
   - Start building your SDC
   * Create a story for the component
   * Build (or run) Storybook
-  * Develop the story inside Storybook 
+  * Develop the SDC inside Storybook 
   * Once the SDC is complete, add it to your Drupal template.
 
 ---
