@@ -350,6 +350,16 @@ drush role:perm:add anonymous 'render storybook stories'
 
 ---
 
+<!-- _footer: '' -->
+## Storybook Module
+
+- The whole mid section here is an iframe that points to Drupal.
+- The route is provided by the Storybook module.
+
+![centre](../src/assets/images/storybook_iframe.png)
+
+---
+
 ## Storybook Module - Stories
 
 - You need a `*.stories.twig` file for every component you want to preview.
@@ -785,16 +795,6 @@ location ~* \.(js|css|woff|woff2|ttf)$ {
 }
 ```
 
-
----
-
-<!-- _footer: '' -->
-## Storybook - SDC
-
-- Storybook works by showing off your SDCs as they exist in your site.
-- The whole mid section here is an iframe that points to Drupal.
-
-![centre](../src/assets/images/storybook_iframe.png)
 
 ---
 
