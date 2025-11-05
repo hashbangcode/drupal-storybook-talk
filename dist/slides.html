@@ -1961,7 +1961,8 @@ p.centre {
   </span><span class="hljs-template-tag">{%</span> <span class="hljs-name">story</span> default with {
     name: <span class="hljs-string">&#x27;1. Default&#x27;</span>,
     args: {
-      some_property: <span class="hljs-string">&#x27;A value&#x27;</span>
+      example_property: <span class="hljs-string">&#x27;Example property&#x27;</span>,
+      example_slot: <span class="hljs-string">&#x27;Example slot&#x27;</span>,
     }
   } <span class="hljs-template-tag">%}</span><span class="language-xml">
 
@@ -2332,8 +2333,7 @@ p.centre {
 </div>
 <div class="right">
 <p class="small-text">example_component.stories.twig</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-twig"><span class="language-xml">---
-  </span><span class="hljs-template-tag">{%</span> <span class="hljs-name">story</span> default with {
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-twig"><span class="language-xml">  </span><span class="hljs-template-tag">{%</span> <span class="hljs-name">story</span> default with {
     name: <span class="hljs-string">&#x27;1. Default&#x27;</span>,
     args: {
       body: <span class="hljs-string">&#x27;&lt;p&gt;Some body copy.&lt;/p&gt;&#x27;</span>
@@ -2344,7 +2344,6 @@ p.centre {
       </span><span class="hljs-template-variable">{{ body<span class="hljs-punctuation">|</span><span class="hljs-keyword">raw</span> }}</span><span class="language-xml">
     </span><span class="hljs-template-tag">{%</span> <span class="hljs-name">endblock</span> <span class="hljs-template-tag">%}</span><span class="language-xml">
   </span><span class="hljs-template-tag">{%</span> <span class="hljs-name">endembed</span> <span class="hljs-template-tag">%}</span><span class="language-xml">
----
 </span></code></pre>
 </div>
 </div>
@@ -2418,7 +2417,7 @@ p.centre {
       example_slot: <span class="hljs-string">&#x27;&lt;p&gt;Example slot with lots of content.&lt;/p&gt;&#x27;</span>,
     }
   } <span class="hljs-template-tag">%}</span><span class="language-xml">
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;border:1px solid red; width: 100px;&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;border:1px solid red; width: 365px; height: 500px;&quot;</span>&gt;</span>
     </span><span class="hljs-template-tag">{%</span> <span class="hljs-name">embed</span> <span class="hljs-string">&#x27;my_theme:example_component&#x27;</span> <span class="hljs-template-tag">%}</span><span class="language-xml">
       </span><span class="hljs-template-tag">{%</span> <span class="hljs-name">block</span> example_slot <span class="hljs-template-tag">%}</span><span class="language-xml">
         </span><span class="hljs-template-variable">{{ example_slot<span class="hljs-punctuation">|</span><span class="hljs-keyword">raw</span> }}</span><span class="language-xml">
@@ -3624,7 +3623,7 @@ p.centre {
 </ul>
 <footer>Philip Norton <a href="https://www.hashbangcode.com">hashbangcode.com</a> <a href="https://fosstodon.org/@hashbangcode">fosstodon.org@hashbangcode</a> <a href="https://fosstodon.org/@philipnorton42">fosstodon.org@philipnorton42</a></footer>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="52" data-paginate="true" data-class="lead" data-theme="uncover" data-style="img[alt~=&quot;centre&quot;] {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="52" data-paginate="true" data-class="lead" data-footer="Philip Norton [hashbangcode.com](https://www.hashbangcode.com) [fosstodon.org@hashbangcode](https://fosstodon.org/@hashbangcode) [fosstodon.org@philipnorton42](https://fosstodon.org/@philipnorton42)" data-theme="uncover" data-style="img[alt~=&quot;centre&quot;] {
   display: block;
   margin: 0 auto;
   max-width: 80%;
@@ -3652,71 +3651,7 @@ p.centre {
   width: 50%;
   float: right;
 }
-" lang="C" class="lead" data-marpit-pagination="52" style="--paginate:true;--class:lead;--theme:uncover;--style:img[alt~=&quot;centre&quot;] {
-  display: block;
-  margin: 0 auto;
-  max-width: 80%;
-}
-.smaller-text {
-  font-size: 0.75rem;
-}
-.small-text {
-  font-size: 0.5rem;
-}
-p {
-  text-align: left;
-}
-p.centre {
-  text-align: center;
-}
-.hidden-bullets li {
-  list-style-type: none
-}
-.left {
-  width: 50%;
-  float: left;
-}
-.right {
-  width: 50%;
-  float: right;
-}
-;" data-marpit-pagination-total="65" data-size="16:9">
-<h2 id="storybook---sdc">Storybook - SDC</h2>
-<ul>
-<li>Storybook works by showing off your SDCs as they exist in your site.</li>
-<li>The whole mid section here is an iframe that points to Drupal.</li>
-</ul>
-<p><img src="../src/assets/images/storybook_iframe.png" alt="centre" /></p>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="53" data-paginate="true" data-class="lead" data-footer="Philip Norton [hashbangcode.com](https://www.hashbangcode.com) [fosstodon.org@hashbangcode](https://fosstodon.org/@hashbangcode) [fosstodon.org@philipnorton42](https://fosstodon.org/@philipnorton42)" data-theme="uncover" data-style="img[alt~=&quot;centre&quot;] {
-  display: block;
-  margin: 0 auto;
-  max-width: 80%;
-}
-.smaller-text {
-  font-size: 0.75rem;
-}
-.small-text {
-  font-size: 0.5rem;
-}
-p {
-  text-align: left;
-}
-p.centre {
-  text-align: center;
-}
-.hidden-bullets li {
-  list-style-type: none
-}
-.left {
-  width: 50%;
-  float: left;
-}
-.right {
-  width: 50%;
-  float: right;
-}
-" lang="C" class="lead" data-marpit-pagination="53" style="--paginate:true;--class:lead;--footer:Philip Norton [hashbangcode.com](https://www.hashbangcode.com) [fosstodon.org@hashbangcode](https://fosstodon.org/@hashbangcode) [fosstodon.org@philipnorton42](https://fosstodon.org/@philipnorton42);--theme:uncover;--style:img[alt~=&quot;centre&quot;] {
+" lang="C" class="lead" data-marpit-pagination="52" style="--paginate:true;--class:lead;--footer:Philip Norton [hashbangcode.com](https://www.hashbangcode.com) [fosstodon.org@hashbangcode](https://fosstodon.org/@hashbangcode) [fosstodon.org@philipnorton42](https://fosstodon.org/@philipnorton42);--theme:uncover;--style:img[alt~=&quot;centre&quot;] {
   display: block;
   margin: 0 auto;
   max-width: 80%;
@@ -3758,6 +3693,80 @@ p.centre {
 }
 </code></pre>
 <footer>Philip Norton <a href="https://www.hashbangcode.com">hashbangcode.com</a> <a href="https://fosstodon.org/@hashbangcode">fosstodon.org@hashbangcode</a> <a href="https://fosstodon.org/@philipnorton42">fosstodon.org@philipnorton42</a></footer>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="53" data-paginate="true" data-class="lead" data-theme="uncover" data-style="img[alt~=&quot;centre&quot;] {
+  display: block;
+  margin: 0 auto;
+  max-width: 80%;
+}
+.smaller-text {
+  font-size: 0.75rem;
+}
+.small-text {
+  font-size: 0.5rem;
+}
+p {
+  text-align: left;
+}
+p.centre {
+  text-align: center;
+}
+.hidden-bullets li {
+  list-style-type: none
+}
+.left {
+  width: 50%;
+  float: left;
+}
+.right {
+  width: 50%;
+  float: right;
+}
+" lang="C" class="lead" data-marpit-pagination="53" style="--paginate:true;--class:lead;--theme:uncover;--style:img[alt~=&quot;centre&quot;] {
+  display: block;
+  margin: 0 auto;
+  max-width: 80%;
+}
+.smaller-text {
+  font-size: 0.75rem;
+}
+.small-text {
+  font-size: 0.5rem;
+}
+p {
+  text-align: left;
+}
+p.centre {
+  text-align: center;
+}
+.hidden-bullets li {
+  list-style-type: none
+}
+.left {
+  width: 50%;
+  float: left;
+}
+.right {
+  width: 50%;
+  float: right;
+}
+;" data-marpit-pagination-total="65" data-size="16:9">
+<h2 id="building-storybook---hosting-1">Building Storybook - Hosting</h2>
+<ul>
+<li>Extra configuration is needed for external files in your Drupal site.</li>
+</ul>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-nginx"><span class="hljs-section">location</span> <span class="hljs-variable">@rewrite</span> {
+    <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^</span> /index.php;
+}
+
+<span class="hljs-section">location</span> <span class="hljs-regexp">~* \.(js|css|woff|woff2|ttf)$</span> {
+    <span class="hljs-attribute">add_header</span> Access-Control-Allow-Origin <span class="hljs-string">&#x27;*&#x27;</span>;
+    <span class="hljs-attribute">add_header</span> X-Content-Type-Options nosniff;
+    <span class="hljs-attribute">try_files</span> <span class="hljs-variable">$uri</span> <span class="hljs-variable">@rewrite</span>;
+    <span class="hljs-attribute">expires</span> -<span class="hljs-number">1</span>;
+    <span class="hljs-attribute">log_not_found</span> <span class="hljs-literal">off</span>;
+}
+</code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="54" data-paginate="true" data-class="lead" data-theme="uncover" data-style="img[alt~=&quot;centre&quot;] {
   display: block;
@@ -3816,22 +3825,12 @@ p.centre {
   float: right;
 }
 ;" data-marpit-pagination-total="65" data-size="16:9">
-<h2 id="building-storybook---hosting-1">Building Storybook - Hosting</h2>
+<h2 id="storybook---sdc">Storybook - SDC</h2>
 <ul>
-<li>Extra configuration is needed for external files in your Drupal site.</li>
+<li>Storybook works by showing off your SDCs as they exist in your site.</li>
+<li>The whole mid section here is an iframe that points to Drupal.</li>
 </ul>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-nginx"><span class="hljs-section">location</span> <span class="hljs-variable">@rewrite</span> {
-    <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^</span> /index.php;
-}
-
-<span class="hljs-section">location</span> <span class="hljs-regexp">~* \.(js|css|woff|woff2|ttf)$</span> {
-    <span class="hljs-attribute">add_header</span> Access-Control-Allow-Origin <span class="hljs-string">&#x27;*&#x27;</span>;
-    <span class="hljs-attribute">add_header</span> X-Content-Type-Options nosniff;
-    <span class="hljs-attribute">try_files</span> <span class="hljs-variable">$uri</span> <span class="hljs-variable">@rewrite</span>;
-    <span class="hljs-attribute">expires</span> -<span class="hljs-number">1</span>;
-    <span class="hljs-attribute">log_not_found</span> <span class="hljs-literal">off</span>;
-}
-</code></pre>
+<p><img src="../src/assets/images/storybook_iframe.png" alt="centre" /></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="55" data-marpit-fragments="4" data-paginate="true" data-class="lead" data-footer="Philip Norton [hashbangcode.com](https://www.hashbangcode.com) [fosstodon.org@hashbangcode](https://fosstodon.org/@hashbangcode) [fosstodon.org@philipnorton42](https://fosstodon.org/@philipnorton42)" data-theme="uncover" data-style="img[alt~=&quot;centre&quot;] {
   display: block;
@@ -3900,7 +3899,7 @@ p.centre {
 <ul>
 <li data-marpit-fragment="1">Create a story for the component</li>
 <li data-marpit-fragment="2">Build (or run) Storybook</li>
-<li data-marpit-fragment="3">Develop the story inside Storybook</li>
+<li data-marpit-fragment="3">Develop the SDC inside Storybook</li>
 <li data-marpit-fragment="4">Once the SDC is complete, add it to your Drupal template.</li>
 </ul>
 </li>
