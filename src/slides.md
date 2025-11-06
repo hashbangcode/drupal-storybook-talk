@@ -713,38 +713,9 @@ npm run storybook
 
 - This will open a browser window with the address http://localhost:6006.
 
----
-<!-- _footer: '' -->
-## Running Storybook - DDEV
-
-- If you are using DDEV then you can run Storybook from inside the web container, with some config.
-
-```yml
-web_extra_exposed_ports:
-  - name: storybook
-    container_port: 6006
-    http_port: 6007
-    https_port: 6006
-web_extra_daemons:
-  - name: node.js
-    command: "tail -F package.json > /dev/null"
-    directory: /var/www/html/tests
-```
-<!--
-Add this to your .ddev/config.yml file and restart ddev.
+<!-- 
+If you are running Storybook inside DDEV then there are some extra options you need to set to get this working.
 -->
---- 
-
-## Running Storybook - DDEV
-
-- To stop DDEV complaining you may want to add <br> `--no-open` flag to the relevant line in the `package.json` file to prevent the browser opening.
-
-```
-  "scripts": {
-    "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
-  },
-```
 
 ---
 
@@ -901,3 +872,42 @@ Whilst theoretically possible, no SDC is an island. You will find that Drupal ha
 - Slides: https://github.com/hashbangcode/drupal-storybook-talk
 
 ![bg h:50% right:40%](../src/assets/images/qr_slides.png)
+
+
+---
+
+# Extra Slides
+
+---
+
+<!-- _footer: '' -->
+## Running Storybook - DDEV
+
+- If you are using DDEV then you can run Storybook from inside the web container, with some config.
+
+```yml
+web_extra_exposed_ports:
+  - name: storybook
+    container_port: 6006
+    http_port: 6007
+    https_port: 6006
+web_extra_daemons:
+  - name: node.js
+    command: "tail -F package.json > /dev/null"
+    directory: /var/www/html/tests
+```
+<!--
+Add this to your .ddev/config.yml file and restart ddev.
+-->
+--- 
+
+## Running Storybook - DDEV
+
+- To stop DDEV complaining you may want to add <br> `--no-open` flag to the relevant line in the `package.json` file to prevent the browser opening.
+
+```
+  "scripts": {
+    "storybook": "storybook dev -p 6006 --no-open",
+    "build-storybook": "storybook build"
+  },
+```
