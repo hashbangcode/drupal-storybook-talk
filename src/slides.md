@@ -75,9 +75,8 @@ marp: true
 - There's also a Drupal and Storybook article on my site.
 -->
 
-
-
 ---
+
 # What Is Storybook?
 
 - Storybook is a frontend tool for creating UI components.
@@ -872,7 +871,6 @@ Whilst theoretically possible, no SDC is an island. You will find that Drupal ha
 - Slides: https://github.com/hashbangcode/drupal-storybook-talk
 
 ![bg h:50% right:40%](../src/assets/images/qr_slides.png)
-
 
 ---
 
